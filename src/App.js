@@ -7,7 +7,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<h1>Hello World</h1>} />
+        <Route path="/" element={<></>} />
       </Routes>
       <Chatbot />
     </Router>

@@ -74,7 +74,7 @@ const Chatbot = () => {
     // Iterate over the trade and statement data to perform the matching
     tradeData.forEach((trade) => {
       statementData.forEach((statement) => {
-        if (trade.specid === statement.reference1) {
+        if (trade.source === statement.source && trade.specid === statement.reference1) {
           matchedTrades.push(trade);
           matchedStatements.push(statement);
         }
@@ -142,7 +142,7 @@ const Chatbot = () => {
         {
           value: "rule1",
           label: "Reference Based Match",
-          trigger: "thanks",
+          trigger: "referenceBasedMatch",
         },
         {
           value: "rule2",
@@ -203,14 +203,14 @@ const Chatbot = () => {
     <ResultScreen
       matchedTrades={matchedTrades}
       matchedStatements={matchedStatements}
-      title1={"Matched Trades : "}
+      title1={"Matched Ledgers : "}
       title2={"Matched Statements : "}
     />
   ) : (
     <ResultScreen
       matchedTrades={tradeData}
       matchedStatements={statementData}
-      title1={"UnMatched Trades : "}
+      title1={"UnMatched Ledgers : "}
       title2={"UnMatched Statements : "}
     />
   )}

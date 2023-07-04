@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "../ag-grid/ag-grid.css";
 import "../ag-grid/ag-theme-alpine.css";
+import "./resultScreen.css";
 
 
 const ResultScreen = ({ matchedTrades, matchedStatements, title1, title2 }) => {
@@ -36,12 +37,12 @@ const ResultScreen = ({ matchedTrades, matchedStatements, title1, title2 }) => {
   }),[]);
 
   return (
-    <div style={{ display: "flex", height: "100%" }}>
-      <div style={{ flex: 1 , width:"100vh"}}>
+    <div style={{ display: "flex", height: "100vh" , flexWrap:"wrap"}}>
+      <div style={{width:"100vw"}}>
         <h2>{title1}</h2>
         <div
           className="ag-theme-alpine"
-          style={{ height: "50vh", width: "100%" }}
+          style={{ height: "70vh", width: "100%" }}
         >
           <AgGridReact
             rowData={matchedTrades}
@@ -55,16 +56,21 @@ const ResultScreen = ({ matchedTrades, matchedStatements, title1, title2 }) => {
           ></AgGridReact>
         </div>
       </div>
-      <div style={{ flex: 1 }}>
+      <div style={{ width:"100vw" }}>
         <h2>{title2}</h2>
         <div
           className="ag-theme-alpine"
-          style={{ height: "50vh", width: "100%" }}
+          style={{ height: "70vh", width: "100%" }}
         >
           <AgGridReact
             rowData={matchedStatements}
             columnDefs={statementColumnDefs}
             pagination={true}
+            defaultColDef={defaultColDef}
+            rowSelection="multiple"
+            animateRows={true}
+            rowGroupPanelShow="always"
+            enableRowGroup={true}
           ></AgGridReact>
         </div>
       </div>

@@ -1,0 +1,36 @@
+/* Reduce the font size of the grid cells */
+.ag-cell {
+  font-size: 0.9vw;
+}
+
+/* Reduce the overall size of the grid */
+.ag-root {
+  font-size: 0.9vw;
+}
+
+.ag-root .ag-header {
+  height: 30px;
+}
+
+.ag-root .ag-body-viewport {
+  height: 100%;
+}
+/* ---------------------------------------------------------------- */
+
+
+/* Reduce the scrollbar width */
+.ag-root ::-webkit-scrollbar,
+.ag-root ::-webkit-scrollbar-horizontal {
+  width: 6px;
+}
+
+.ag-root ::-webkit-scrollbar-thumb,
+.ag-root ::-webkit-scrollbar-thumb:horizontal {
+  background-color: #888;
+  border-radius: 3px;
+}
+
+.ag-root ::-webkit-scrollbar-track,
+.ag-root ::-webkit-scrollbar-track:horizontal {
+  background-color: #f1f1f1;
+}
