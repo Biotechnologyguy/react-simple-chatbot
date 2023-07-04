@@ -1,13 +1,17 @@
-import './App.css';
-import Chatbot from './components/Chatbot';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Chatbot from "./components/Chatbot";
 
-function App() {
+
+const App = () => {
   return (
-    <div className="App">
-      <h1>Hello World</h1>
-      <Chatbot/>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<h1>Hello World</h1>} />
+      </Routes>
+      <Chatbot />
+    </Router>
   );
-}
+};
 
 export default App;

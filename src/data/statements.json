@@ -1,0 +1,543 @@
+[
+  {
+    "entryid": 1,
+    "reference1": 201,
+    "reference2": null,
+    "reference3": 301,
+    "source": "source1",
+    "amount": -1456,
+    "currency": "USD"
+  },
+  {
+    "entryid": 2,
+    "reference1": null,
+    "reference2": "SETTLE002",
+    "reference3": 302,
+    "source": "source2",
+    "amount": 1700,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 3,
+    "reference1": 203,
+    "reference2": null,
+    "reference3": 303,
+    "source": "source3",
+    "amount": -2100,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 4,
+    "reference1": 204,
+    "reference2": null,
+    "reference3": 304,
+    "source": "source4",
+    "amount": 2500,
+    "currency": "USD"
+  },
+  {
+    "entryid": 5,
+    "reference1": null,
+    "reference2": "SETTLE005",
+    "reference3": 305,
+    "source": "source5",
+    "amount": -1800,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 6,
+    "reference1": 206,
+    "reference2": null,
+    "reference3": 306,
+    "source": "source6",
+    "amount": 1200,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 7,
+    "reference1": 207,
+    "reference2": null,
+    "reference3": 307,
+    "source": "source7",
+    "amount": -3000,
+    "currency": "USD"
+  },
+  {
+    "entryid": 8,
+    "reference1": null,
+    "reference2": "SETTLE008",
+    "reference3": 308,
+    "source": "source8",
+    "amount": 900,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 9,
+    "reference1": 209,
+    "reference2": null,
+    "reference3": 309,
+    "source": "source1",
+    "amount": -1500,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 10,
+    "reference1": null,
+    "reference2": "SETTLE010",
+    "reference3": 310,
+    "source": "source2",
+    "amount": 1800,
+    "currency": "USD"
+  },
+  {
+    "entryid": 11,
+    "reference1": 211,
+    "reference2": null,
+    "reference3": 311,
+    "source": "source3",
+    "amount": -1456,
+    "currency": "USD"
+  },
+  {
+    "entryid": 12,
+    "reference1": null,
+    "reference2": "SETTLE012",
+    "reference3": 312,
+    "source": "source4",
+    "amount": 1700,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 13,
+    "reference1": 213,
+    "reference2": null,
+    "reference3": 313,
+    "source": "source5",
+    "amount": -2100,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 14,
+    "reference1": 214,
+    "reference2": null,
+    "reference3": 314,
+    "source": "source6",
+    "amount": 2500,
+    "currency": "USD"
+  },
+  {
+    "entryid": 15,
+    "reference1": null,
+    "reference2": "SETTLE015",
+    "reference3": 315,
+    "source": "source7",
+    "amount": -1800,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 16,
+    "reference1": 216,
+    "reference2": null,
+    "reference3": 316,
+    "source": "source8",
+    "amount": 1200,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 17,
+    "reference1": 217,
+    "reference2": null,
+    "reference3": 317,
+    "source": "source1",
+    "amount": -3000,
+    "currency": "USD"
+  },
+  {
+    "entryid": 18,
+    "reference1": null,
+    "reference2": "SETTLE018",
+    "reference3": 318,
+    "source": "source2",
+    "amount": 900,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 19,
+    "reference1": 219,
+    "reference2": null,
+    "reference3": 319,
+    "source": "source3",
+    "amount": -1500,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 20,
+    "reference1": null,
+    "reference2": "SETTLE020",
+    "reference3": 320,
+    "source": "source4",
+    "amount": 1800,
+    "currency": "USD"
+  },
+  {
+    "entryid": 21,
+    "reference1": 221,
+    "reference2": null,
+    "reference3": 321,
+    "source": "source5",
+    "amount": -1456,
+    "currency": "USD"
+  },
+  {
+    "entryid": 22,
+    "reference1": null,
+    "reference2": "SETTLE022",
+    "reference3": 322,
+    "source": "source6",
+    "amount": 1700,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 23,
+    "reference1": 223,
+    "reference2": null,
+    "reference3": 323,
+    "source": "source7",
+    "amount": -2100,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 24,
+    "reference1": 224,
+    "reference2": null,
+    "reference3": 324,
+    "source": "source8",
+    "amount": 2500,
+    "currency": "USD"
+  },
+  {
+    "entryid": 25,
+    "reference1": null,
+    "reference2": "SETTLE025",
+    "reference3": 325,
+    "source": "source1",
+    "amount": -1800,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 26,
+    "reference1": 226,
+    "reference2": null,
+    "reference3": 326,
+    "source": "source2",
+    "amount": 1200,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 27,
+    "reference1": 227,
+    "reference2": null,
+    "reference3": 327,
+    "source": "source3",
+    "amount": -3000,
+    "currency": "USD"
+  },
+  {
+    "entryid": 28,
+    "reference1": null,
+    "reference2": "SETTLE028",
+    "reference3": 328,
+    "source": "source4",
+    "amount": 900,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 29,
+    "reference1": 229,
+    "reference2": null,
+    "reference3": 329,
+    "source": "source5",
+    "amount": -1500,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 30,
+    "reference1": null,
+    "reference2": "SETTLE030",
+    "reference3": 330,
+    "source": "source6",
+    "amount": 1800,
+    "currency": "USD"
+  },
+  {
+    "entryid": 31,
+    "reference1": 231,
+    "reference2": null,
+    "reference3": 331,
+    "source": "source7",
+    "amount": -1456,
+    "currency": "USD"
+  },
+  {
+    "entryid": 32,
+    "reference1": null,
+    "reference2": "SETTLE032",
+    "reference3": 332,
+    "source": "source8",
+    "amount": 1700,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 33,
+    "reference1": 233,
+    "reference2": null,
+    "reference3": 333,
+    "source": "source1",
+    "amount": -2100,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 34,
+    "reference1": 234,
+    "reference2": null,
+    "reference3": 334,
+    "source": "source2",
+    "amount": 2500,
+    "currency": "USD"
+  },
+  {
+    "entryid": 35,
+    "reference1": null,
+    "reference2": "SETTLE035",
+    "reference3": 335,
+    "source": "source3",
+    "amount": -1800,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 36,
+    "reference1": 236,
+    "reference2": null,
+    "reference3": 336,
+    "source": "source4",
+    "amount": 1200,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 37,
+    "reference1": 237,
+    "reference2": null,
+    "reference3": 337,
+    "source": "source5",
+    "amount": -3000,
+    "currency": "USD"
+  },
+  {
+    "entryid": 38,
+    "reference1": null,
+    "reference2": "SETTLE038",
+    "reference3": 338,
+    "source": "source6",
+    "amount": 900,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 39,
+    "reference1": 239,
+    "reference2": null,
+    "reference3": 339,
+    "source": "source7",
+    "amount": -1500,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 40,
+    "reference1": null,
+    "reference2": "SETTLE040",
+    "reference3": 340,
+    "source": "source8",
+    "amount": 1800,
+    "currency": "USD"
+  },
+  {
+    "entryid": 41,
+    "reference1": 241,
+    "reference2": null,
+    "reference3": 341,
+    "source": "source1",
+    "amount": -1456,
+    "currency": "USD"
+  },
+  {
+    "entryid": 42,
+    "reference1": null,
+    "reference2": "SETTLE042",
+    "reference3": 342,
+    "source": "source2",
+    "amount": 1700,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 43,
+    "reference1": 243,
+    "reference2": null,
+    "reference3": 343,
+    "source": "source3",
+    "amount": -2100,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 44,
+    "reference1": 244,
+    "reference2": null,
+    "reference3": 344,
+    "source": "source4",
+    "amount": 2500,
+    "currency": "USD"
+  },
+  {
+    "entryid": 45,
+    "reference1": null,
+    "reference2": "SETTLE045",
+    "reference3": 345,
+    "source": "source5",
+    "amount": -1800,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 46,
+    "reference1": 246,
+    "reference2": null,
+    "reference3": 346,
+    "source": "source6",
+    "amount": 1200,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 47,
+    "reference1": 247,
+    "reference2": null,
+    "reference3": 347,
+    "source": "source7",
+    "amount": -3000,
+    "currency": "USD"
+  },
+  {
+    "entryid": 48,
+    "reference1": null,
+    "reference2": "SETTLE048",
+    "reference3": 348,
+    "source": "source8",
+    "amount": 900,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 49,
+    "reference1": 249,
+    "reference2": null,
+    "reference3": 349,
+    "source": "source1",
+    "amount": -1500,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 50,
+    "reference1": null,
+    "reference2": "SETTLE050",
+    "reference3": 350,
+    "source": "source2",
+    "amount": 1800,
+    "currency": "USD"
+  },
+
+  {
+    "entryid": 91,
+    "reference1": 291,
+    "reference2": null,
+    "reference3": 391,
+    "source": "source3",
+    "amount": -1456,
+    "currency": "USD"
+  },
+  {
+    "entryid": 92,
+    "reference1": null,
+    "reference2": "SETTLE092",
+    "reference3": 392,
+    "source": "source4",
+    "amount": 1700,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 93,
+    "reference1": 293,
+    "reference2": null,
+    "reference3": 393,
+    "source": "source5",
+    "amount": -2100,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 94,
+    "reference1": 294,
+    "reference2": null,
+    "reference3": 394,
+    "source": "source6",
+    "amount": 2500,
+    "currency": "USD"
+  },
+  {
+    "entryid": 95,
+    "reference1": null,
+    "reference2": "SETTLE095",
+    "reference3": 395,
+    "source": "source7",
+    "amount": -1800,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 96,
+    "reference1": 296,
+    "reference2": null,
+    "reference3": 396,
+    "source": "source8",
+    "amount": 1200,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 97,
+    "reference1": 297,
+    "reference2": null,
+    "reference3": 397,
+    "source": "source1",
+    "amount": -3000,
+    "currency": "USD"
+  },
+  {
+    "entryid": 98,
+    "reference1": null,
+    "reference2": "SETTLE098",
+    "reference3": 398,
+    "source": "source2",
+    "amount": 900,
+    "currency": "GBP"
+  },
+  {
+    "entryid": 99,
+    "reference1": 299,
+    "reference2": null,
+    "reference3": 399,
+    "source": "source3",
+    "amount": -1500,
+    "currency": "EUR"
+  },
+  {
+    "entryid": 100,
+    "reference1": null,
+    "reference2": "SETTLE100",
+    "reference3": 400,
+    "source": "source4",
+    "amount": 1800,
+    "currency": "USD"
+  }
+]
