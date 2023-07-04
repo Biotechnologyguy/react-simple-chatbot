@@ -33,8 +33,6 @@ const ResultScreen = ({ matchedTrades, matchedStatements, title1, title2 }) => {
     sortable:true,
     filter:'textFilter',
     floatingFilter:true,
-    enableRowGroup:true,
-    enablePivot:true
   }),[]);
 
   return (
@@ -53,7 +51,6 @@ const ResultScreen = ({ matchedTrades, matchedStatements, title1, title2 }) => {
             rowSelection="multiple"
             animateRows={true}
             rowGroupPanelShow="always"
-            enableCharts={true}
             enableRowGroup={true}
           ></AgGridReact>
         </div>
