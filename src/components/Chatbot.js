@@ -27,14 +27,14 @@ const config = {
 
 // Define options for the source menu
 const sourceMenuOptions = [
-  { value: "source1", label: "Source 1", trigger: "sourceSelected1" },
-  { value: "source2", label: "Source 2", trigger: "sourceSelected2" },
-  { value: "source3", label: "Source 3", trigger: "sourceSelected2" },
-  { value: "source4", label: "Source 4", trigger: "sourceSelected2" },
-  { value: "source5", label: "Source 5", trigger: "sourceSelected2" },
-  { value: "source6", label: "Source 6", trigger: "sourceSelected2" },
-  { value: "source7", label: "Source 7", trigger: "sourceSelected2" },
-  { value: "source8", label: "Source 8", trigger: "sourceSelected2" },
+  { value: "source1", label: "Source 1", trigger: "sourceSelected" },
+  { value: "source2", label: "Source 2", trigger: "sourceSelected" },
+  { value: "source3", label: "Source 3", trigger: "sourceSelected" },
+  { value: "source4", label: "Source 4", trigger: "sourceSelected" },
+  { value: "source5", label: "Source 5", trigger: "sourceSelected" },
+  { value: "source6", label: "Source 6", trigger: "sourceSelected" },
+  { value: "source7", label: "Source 7", trigger: "sourceSelected" },
+  { value: "source8", label: "Source 8", trigger: "sourceSelected" },
 ];
 
 const Chatbot = () => {
@@ -82,10 +82,18 @@ const Chatbot = () => {
     });
 
     // Set the matched data
-
     setMatchedTrades(matchedTrades);
     setMatchedStatements(matchedStatements);
   };
+
+  const getUnmatchedTrades = () => {
+    return tradeData.filter((trade) => !matchedTrades.includes(trade));
+  };
+
+  const getUnmatchedStatements = () => {
+    return statementData.filter((statement) => !matchedStatements.includes(statement));
+  };
+
 
   const steps = [
     {
@@ -98,17 +106,12 @@ const Chatbot = () => {
       options: sourceMenuOptions,
     },
     {
-      id: "sourceSelected1",
+      id: "sourceSelected",
       message: "You have selected: {previousValue}",
-      trigger: "ruleOptions1",
+      trigger: "ruleOptions",
     },
     {
-      id: "sourceSelected2",
-      message: "You have selected: {previousValue}",
-      trigger: "ruleOptions2",
-    },
-    {
-      id: "ruleOptions1",
+      id: "ruleOptions",
       options: [
         {
           value: "rule1",
@@ -118,45 +121,22 @@ const Chatbot = () => {
         {
           value: "rule2",
           label: "Match on Amount",
-          trigger: "thanks",
+          trigger: "add-another-rule",
         },
         {
           value: "rule3",
           label: "Match With tolerance",
-          trigger: "ruleMatchWithTolerance",
+          trigger: "yet-to-implement",
         },
         {
           value: "rule4",
           label: "Ledger to Ledger Match",
+          trigger: "yet-to-implement",
         },
         {
           value: "rule5",
           label: "Netted Match",
-          trigger: "thanks",
-        },
-      ],
-    },
-    {
-      id: "ruleOptions2",
-      options: [
-        {
-          value: "rule1",
-          label: "Reference Based Match",
-          trigger: "referenceBasedMatch",
-        },
-        {
-          value: "rule2",
-          label: "Match on Amount",
-          trigger: "thanks",
-        },
-        {
-          value: "rule3",
-          label: "Match With tolerance",
-          trigger: "ruleMatchWithTolerance",
-        },
-        {
-          value: "rule4",
-          label: "Ledger to Ledger Match",
+          trigger: "yet-to-implement",
         },
       ],
     },
@@ -169,7 +149,7 @@ const Chatbot = () => {
       id: "amountInput",
       user: true,
       validator: (value) => handleAmountInput(value),
-      trigger: "thanks",
+      trigger: "add-another-rule",
     },
     {
       id: "referenceBasedMatch",
@@ -187,34 +167,57 @@ const Chatbot = () => {
     {
       id: "displayResults",
       message: "Matched trades and statements found!",
-      end: true,
+      trigger: "add-another-rule",
+    },
+    {
+      id: "add-another-rule",
+      message: "Want to add another Rule?",
+      trigger: "add-rule-yes-no",
+    },
+    {
+      id: "add-rule-yes-no",
+      options: [
+        {
+          value: "yes",
+          label: "yes",
+          trigger: "1",
+        },
+        {
+          value: "no",
+          label: "no",
+          trigger: "thanks",
+        },
+      ]
     },
     {
       id: "thanks",
-      message: "Want to add another Rule?",
-      trigger: "sourceMenu",
+      message: "Thanks For Using BankBot",
+      end: true,
+    },
+    {
+      id: "yet-to-implement",
+      message: "This rule is not implemented as of now. Please try reference based or amount based match",
+      trigger: "add-another-rule",
     },
   ];
 
   return (
-<ThemeProvider theme={theme}>
-  <ChatBot steps={steps} {...config} />
-  {matchedTrades.length > 0 && matchedStatements.length > 0 ? (
-    <ResultScreen
-      matchedTrades={matchedTrades}
-      matchedStatements={matchedStatements}
-      title1={"Matched Ledgers : "}
-      title2={"Matched Statements : "}
-    />
-  ) : (
-    <ResultScreen
-      matchedTrades={tradeData}
-      matchedStatements={statementData}
-      title1={"UnMatched Ledgers : "}
-      title2={"UnMatched Statements : "}
-    />
-  )}
-</ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <ChatBot steps={steps} {...config} />
+      {matchedTrades.length > 0 && matchedStatements.length > 0 ? (
+        <ResultScreen
+          matchedTrades={matchedTrades}
+          matchedStatements={matchedStatements}
+          unmatchedTrades={getUnmatchedTrades()}
+          unmatchedStatements={getUnmatchedStatements()}
+        />
+      ) : <ResultScreen
+      matchedTrades={[]}
+      matchedStatements={[]}
+      unmatchedTrades={tradeData}
+      unmatchedStatements={statementData}
+    />}
+    </ThemeProvider>
   );
 };
 
