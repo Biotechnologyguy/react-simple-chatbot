@@ -1,8 +1,10 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useCallback, useRef } from "react";
 import { AgGridReact } from "ag-grid-react";
+import { saveAs } from "file-saver";
 import "../ag-grid/ag-grid.css";
 import "../ag-grid/ag-theme-alpine.css";
 import "./resultScreen.css";
+import DownloadButton from "./DownloadButton.js";
 
 const ResultScreen = ({
   matchedTrades,
@@ -42,24 +44,76 @@ const ResultScreen = ({
   );
 
   const [showMatched, setShowMatched] = useState(true);
+  const gridApiRefMatchedTrades = useRef(null);
+  const gridColumnApiRefMatchedTrades = useRef(null);
+  const gridApiRefMatchedStatements = useRef(null);
+  const gridColumnApiRefMatchedStatements = useRef(null);
+  const gridApiRefUnmatchedTrades = useRef(null);
+  const gridColumnApiRefUnmatchedTrades = useRef(null);
+  const gridApiRefUnmatchedStatements = useRef(null);
+  const gridColumnApiRefUnmatchedStatements = useRef(null);
 
   const handleToggleChange = () => {
     setShowMatched(!showMatched);
   };
+
+  const handleDownload = useCallback(
+    (fileName, rowData) => {
+      let gridApiRef, gridColumnApiRef;
+
+      if (showMatched) {
+        if (rowData === matchedTrades) {
+          gridApiRef = gridApiRefMatchedTrades.current;
+          gridColumnApiRef = gridColumnApiRefMatchedTrades.current;
+        } else if (rowData === matchedStatements) {
+          gridApiRef = gridApiRefMatchedStatements.current;
+          gridColumnApiRef = gridColumnApiRefMatchedStatements.current;
+        }
+      } else {
+        if (rowData === unmatchedTrades) {
+          gridApiRef = gridApiRefUnmatchedTrades.current;
+          gridColumnApiRef = gridColumnApiRefUnmatchedTrades.current;
+        } else if (rowData === unmatchedStatements) {
+          gridApiRef = gridApiRefUnmatchedStatements.current;
+          gridColumnApiRef = gridColumnApiRefUnmatchedStatements.current;
+        }
+      }
+
+      if (gridApiRef && gridColumnApiRef) {
+        const params = {
+          allColumns: true,
+          onlySelected: false,
+          skipFooters: true,
+          fileName: fileName,
+        };
+
+        const csvData = gridApiRef.getDataAsCsv(params);
+        const blob = new Blob([csvData], { type: "text/csv;charset=utf-8" });
+        saveAs(blob, params.fileName);
+      }
+    },
+    [
+      showMatched,
+      matchedTrades,
+      matchedStatements,
+      unmatchedTrades,
+      unmatchedStatements,
+    ]
+  );
+
   return (
     <div style={{ display: "flex", height: "100vh", flexWrap: "wrap" }}>
-      {/* Checkbox to toggle between Matched and Unmatched */}
       <div className="checkbox-parent-wrapper">
         <div className="checkbox-wrapper-8">
           <input
             type="checkbox"
             id="cb3-8"
-            class="tgl tgl-skewed"
+            className="tgl tgl-skewed"
             checked={showMatched}
             onChange={handleToggleChange}
           />
           <label
-            for="cb3-8"
+            htmlFor="cb3-8"
             data-tg-on="Matched"
             data-tg-off="Unmatched"
             className="tgl-btn"
@@ -67,11 +121,25 @@ const ResultScreen = ({
         </div>
       </div>
 
-      {/* Display based on the matched/unmatched state */}
       {showMatched ? (
         <>
           <div style={{ width: "100vw" }}>
-            <h2>Matched Ledgers:</h2>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "1rem",
+                justifyContent: "space-between",
+              }}
+            >
+              <h2 style={{ marginRight: "1rem" }}>Matched Ledgers:</h2>
+              <DownloadButton
+                onClick={() =>
+                  handleDownload("matched_ledgers.csv", matchedTrades)
+                }
+                gridApiRef={gridApiRefMatchedTrades}
+              />
+            </div>
             <div
               className="ag-theme-alpine"
               style={{ height: "70vh", width: "100%" }}
@@ -85,11 +153,34 @@ const ResultScreen = ({
                 animateRows={true}
                 rowGroupPanelShow="always"
                 enableRowGroup={true}
+                onFirstDataRendered={(params) => {
+                  gridApiRefMatchedTrades.current = params.api;
+                  gridColumnApiRefMatchedTrades.current = params.columnApi;
+                }}
+                onGridReady={(params) => {
+                  gridApiRefMatchedTrades.current = params.api;
+                  gridColumnApiRefMatchedTrades.current = params.columnApi;
+                }}
               ></AgGridReact>
             </div>
           </div>
           <div style={{ width: "100vw" }}>
-            <h2>Matched Statements:</h2>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "1rem",
+                justifyContent: "space-between",
+              }}
+            >
+              <h2>Matched Statements:</h2>
+              <DownloadButton
+                onClick={() =>
+                  handleDownload("matched_statements.csv", matchedStatements)
+                }
+                gridApiRef={gridApiRefMatchedStatements}
+              />
+            </div>
             <div
               className="ag-theme-alpine"
               style={{ height: "70vh", width: "100%" }}
@@ -103,6 +194,14 @@ const ResultScreen = ({
                 animateRows={true}
                 rowGroupPanelShow="always"
                 enableRowGroup={true}
+                onFirstDataRendered={(params) => {
+                  gridApiRefMatchedStatements.current = params.api;
+                  gridColumnApiRefMatchedStatements.current = params.columnApi;
+                }}
+                onGridReady={(params) => {
+                  gridApiRefMatchedStatements.current = params.api;
+                  gridColumnApiRefMatchedStatements.current = params.columnApi;
+                }}
               ></AgGridReact>
             </div>
           </div>
@@ -110,7 +209,23 @@ const ResultScreen = ({
       ) : (
         <>
           <div style={{ width: "100vw" }}>
+          <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "1rem",
+                justifyContent: "space-between",
+              }}
+            >
             <h2>Unmatched Ledgers:</h2>
+            <DownloadButton
+              onClick={() =>
+                handleDownload("unmatched_ledgers.csv", unmatchedTrades)
+              }
+              gridApiRef={gridApiRefUnmatchedTrades}
+            />
+            </div>
+
             <div
               className="ag-theme-alpine"
               style={{ height: "70vh", width: "100%" }}
@@ -124,11 +239,34 @@ const ResultScreen = ({
                 animateRows={true}
                 rowGroupPanelShow="always"
                 enableRowGroup={true}
+                onFirstDataRendered={(params) => {
+                  gridApiRefUnmatchedTrades.current = params.api;
+                  gridColumnApiRefUnmatchedTrades.current = params.columnApi;
+                }}
+                onGridReady={(params) => {
+                  gridApiRefUnmatchedTrades.current = params.api;
+                  gridColumnApiRefUnmatchedTrades.current = params.columnApi;
+                }}
               ></AgGridReact>
             </div>
           </div>
           <div style={{ width: "100vw" }}>
+          <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "1rem",
+                justifyContent: "space-between",
+              }}
+            >
             <h2>Unmatched Statements:</h2>
+            <DownloadButton
+              onClick={() =>
+                handleDownload("unmatched_statements.csv", unmatchedStatements)
+              }
+              gridApiRef={gridApiRefUnmatchedStatements}
+            />
+</div>
             <div
               className="ag-theme-alpine"
               style={{ height: "70vh", width: "100%" }}
@@ -142,6 +280,16 @@ const ResultScreen = ({
                 animateRows={true}
                 rowGroupPanelShow="always"
                 enableRowGroup={true}
+                onFirstDataRendered={(params) => {
+                  gridApiRefUnmatchedStatements.current = params.api;
+                  gridColumnApiRefUnmatchedStatements.current =
+                    params.columnApi;
+                }}
+                onGridReady={(params) => {
+                  gridApiRefUnmatchedStatements.current = params.api;
+                  gridColumnApiRefUnmatchedStatements.current =
+                    params.columnApi;
+                }}
               ></AgGridReact>
             </div>
           </div>
