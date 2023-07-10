@@ -279,7 +279,7 @@ const Chatbot = () => {
     },
     {
       id: "referenceBasedMatch",
-      message: "Performing Reference Based Match... {previousValue}",
+      message: "Performing Reference Based Match...",
       trigger: "processReferenceBasedMatch",
     },
     {
