@@ -36,30 +36,11 @@ const sourceMenuOptions = [
   { value: "source7", label: "Source 7", trigger: "sourceSelected" },
   { value: "source8", label: "Source 8", trigger: "sourceSelected" },
 ];
-const historyBasedOptions = [
-  {
-    value: "Amount Based Match",
-    label: "Amount Based Match",
-    trigger: "amountBasedMatch",
-  },
-  {
-    value: "Match With Tolerance",
-    label: "Match With Tolerance",
-    trigger: "toleranceBasedMatch",
-  },
-  {
-    value: "Netted Match",
-    label: "Netted Match",
-    trigger: "nettedMatch",
-  },
-];
 
 const Chatbot = () => {
   const [amount, setAmount] = useState(null);
   const [matchedTrades, setMatchedTrades] = useState([]);
   const [matchedStatements, setMatchedStatements] = useState([]);
-  const [availableOptions, setAvailableOptions] = useState(historyBasedOptions);
-  const [selectedOption, setSelectedOption] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -118,22 +99,6 @@ const Chatbot = () => {
     );
   };
 
-  const handleOptionSelect = (selectedOption) => {
-    setSelectedOption(selectedOption);
-    console.log(selectedOption);
-    console.log(typeof selectedOption);
-    console.log(availableOptions);
-    const updatedOptions = availableOptions.filter((option) => {
-      console.log(option); // Log the option
-      console.log(option.value); // Log the option.value
-      console.log(option.value !== selectedOption); // prints true false true for selecting match with tolerance. but when i print it after this, i am seeing whole options 3
-      return option.value !== selectedOption;
-    });
-
-    console.log(updatedOptions);
-    setAvailableOptions(updatedOptions);
-  };
-
   const handleAmountBasedMatch = () => {
     const updatedMatchedTrades = [];
     const updatedMatchedStatements = [];
@@ -171,7 +136,7 @@ const Chatbot = () => {
     const updatedMatchedStatements = [];
     const unmatchedTrades = getUnmatchedTrades();
     const unmatchedStatements = getUnmatchedStatements();
-  
+
     unmatchedTrades.forEach((trade) => {
       const matchingStatement = unmatchedStatements.find(
         (statement) =>
@@ -179,7 +144,7 @@ const Chatbot = () => {
           trade.currency === statement.currency && // Add currency check
           Math.abs(trade.amount - statement.amount) <= amount
       );
-  
+
       if (matchingStatement) {
         updatedMatchedTrades.push(trade);
         updatedMatchedStatements.push(matchingStatement);
@@ -189,7 +154,7 @@ const Chatbot = () => {
         );
       }
     });
-  
+
     setMatchedTrades((prevMatchedTrades) => [
       ...prevMatchedTrades,
       ...updatedMatchedTrades,
@@ -199,7 +164,7 @@ const Chatbot = () => {
       ...updatedMatchedStatements,
     ]);
   };
-  
+
   const handleNettedMatch = () => {
     const updatedMatchedTrades = [];
     const updatedMatchedStatements = [];
@@ -303,18 +268,27 @@ const Chatbot = () => {
     },
     {
       id: "show-amt-based-netted-tolerance-option",
-      options: availableOptions.map((option) => ({
-        ...option,
-        trigger: () => {
-          handleOptionSelect(option.value);
-          return option.value.toLowerCase().replace(/ /g, "");
+      options: [
+        {
+          value: "Amount Based Match",
+          label: "Amount Based Match",
+          trigger: "amountBasedMatch",
         },
-        hide: availableOptions.length === 1 && option.value === selectedOption,
-      })),
+        {
+          value: "Match With Tolerance",
+          label: "Match With Tolerance",
+          trigger: "toleranceBasedMatch-after-ref",
+        },
+        {
+          value: "Netted Match",
+          label: "Netted Match",
+          trigger: "nettedmatch",
+        },
+      ],
     },
 
     {
-      id: "amountbasedmatch",
+      id: "amountBasedMatch",
       message: "Performing Amount Based Match...",
       trigger: "processAmountBasedMatch",
     },
@@ -334,30 +308,30 @@ const Chatbot = () => {
     {
       id: "show-netted-tolerance-msg",
       message:
-        availableOptions.length === 0
-          ? "Thank you for using BankBot!"
-          : "You still have more rules to apply based onprevious match history:",
-      trigger:
-        availableOptions.length === 0 ? "end" : "show-netted-tolerance-option",
+        "You still have more rules to apply based on previous match history: ",
+      trigger: "show-netted-tolerance-options",
     },
     {
-      id: "show-netted-tolerance-option",
-      options: availableOptions.map((option) => ({
-        ...option,
-        trigger: () => {
-          handleOptionSelect(option.value);
-          return option.value.toLowerCase().replace(/ /g, "");
+      id: "show-netted-tolerance-options",
+      options: [
+        {
+          value: "Match With Tolerance",
+          label: "Match With Tolerance",
+          trigger: "toleranceBasedMatch",
         },
-        hide: availableOptions.length === 1 && option.value === selectedOption,
-      })),
+        {
+          value: "Netted Match",
+          label: "Netted Match",
+          trigger: "nettedmatch",
+        },
+      ],
     },
-
     //
     //
     //
 
     {
-      id: "matchwithtolerance",
+      id: "toleranceBasedMatch",
       message: "Please enter the amount:",
       trigger: "amountInput",
     },
@@ -388,24 +362,19 @@ const Chatbot = () => {
     {
       id: "show-amount-netted-msg",
       message:
-        availableOptions.length === 0
-          ? "Thank you for using BankBot!"
-          : "You still have more rules to apply based on previous match history:",
-      trigger:
-        availableOptions.length === 0 ? "end" : "show-amount-netted-option",
+        "You still have more rules to apply based on previous match history:",
+      trigger: "show-netted-option",
     },
     {
-      id: "show-amount-netted-option",
-      options: availableOptions.map((option) => ({
-        ...option,
-        trigger: () => {
-          handleOptionSelect(option.value);
-          return option.value.toLowerCase().replace(/ /g, "");
+      id: "show-netted-option",
+      options: [
+        {
+          value: "Netted Match",
+          label: "Netted Match",
+          trigger: "nettedmatch",
         },
-        hide: availableOptions.length === 1 && option.value === selectedOption,
-      })),
+      ],
     },
-
     {
       id: "nettedmatch",
       message: "Performing Netted Match...",
@@ -422,28 +391,121 @@ const Chatbot = () => {
     {
       id: "displayResultsNettedMatch",
       message: "Matched trades and statements found!",
-      trigger: "show-amount-tolerance-msg",
+      trigger: "end",
+    },
+
+
+
+// tolerance based selected After reference based: 
+
+{
+  id: "toleranceBasedMatch-after-ref",
+  message: "Please enter the amount:",
+  trigger: "amountInput2",
+},
+{
+  id: "amountInput2",
+  user: true,
+  validator: (value) => handleAmountInput(value),
+  trigger: "perform-tolerance2",
+},
+{
+  id: "perform-tolerance2",
+  message: "Performing Tolerance Based Match...",
+  trigger: "processToleranceBasedMatch2",
+},
+{
+  id: "processToleranceBasedMatch2",
+  message: "Performing Tolerance Based Match...",
+  trigger: () => {
+    handleToleranceBasedMatch(amount);
+    return "displayResultsToleranceBased2";
+  },
+},
+{
+  id: "displayResultsToleranceBased2",
+  message: "Matched trades and statements found!",
+  trigger: "show-amount-netted-msg2",
+},
+{
+  id: "show-amount-netted-msg2",
+  message:
+    "You still have more rules to apply based on previous match history: ",
+  trigger: "show-amount-netted-options2",
+},
+{
+  id: "show-amount-netted-options2",
+  options: [
+    {
+      value: "Amount Based Match",
+      label: "Amount Based Match",
+      trigger: "amountBasedMatch2",
     },
     {
-      id: "show-amount-tolerance-msg",
-      message:
-        availableOptions.length === 0
-          ? "Thank you for using BankBot!"
-          : "You still have more rules to apply based on previous match history:",
-      trigger:
-        availableOptions.length === 0 ? "end" : "show-amount-tolerance-option",
+      value: "Netted Match",
+      label: "Netted Match",
+      trigger: "nettedmatch2",
     },
+  ],
+},
+
+
+// Amount based match selected after tolerance based : 
+{
+  id: "amountBasedMatch2",
+  message: "Performing Amount Based Match...",
+  trigger: "processAmountBasedMatch2",
+},
+{
+  id: "processAmountBasedMatch2",
+  message: "Performing Amount Based Match...",
+  trigger: () => {
+    handleAmountBasedMatch();
+    return "displayResultsAmountBased2";
+  },
+},
+{
+  id: "displayResultsAmountBased2",
+  message: "Matched trades and statements found!",
+  trigger: "show-netted-msg2",
+},
+{
+  id: "show-netted-msg2",
+  message:
+    "You still have more rules to apply based on previous match history: ",
+  trigger: "show-netted-option2",
+},
+{
+  id: "show-netted-option2",
+  options: [
     {
-      id: "show-amount-tolerance-option",
-      options: availableOptions.map((option) => ({
-        ...option,
-        trigger: () => {
-          handleOptionSelect(option.value);
-          return option.value.toLowerCase().replace(/ /g, "");
-        },
-        hide: availableOptions.length === 1 && option.value === selectedOption,
-      })),
+      value: "Netted Match",
+      label: "Netted Match",
+      trigger: "nettedmatch2",
     },
+  ],
+
+  
+},
+{
+  id: "nettedmatch2",
+  message: "Performing Netted Match...",
+  trigger: "processNettedMatch2",
+},
+{
+  id: "processNettedMatch2",
+  message: "Performing Netted Match...",
+  trigger: () => {
+    handleNettedMatch();
+    return "displayResultsNettedMatch2";
+  },
+},
+{
+  id: "displayResultsNettedMatch2",
+  message: "Matched trades and statements found!",
+  trigger: "end",
+},
+
 
     {
       id: "end",
