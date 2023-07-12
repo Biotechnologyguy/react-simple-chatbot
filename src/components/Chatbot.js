@@ -14,7 +14,7 @@ const theme = {
   headerFontColor: "white",
   headerFontSize: "20pxpx",
   botBubbleColor: "#526d82",
-  botFontColor: "wheite",
+  botFontColor: "white",
   userBubbleColor: "#9db2 ",
   userFontColor: "#4a4a4a",
 };
