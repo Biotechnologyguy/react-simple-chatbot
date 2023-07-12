@@ -282,7 +282,7 @@ const Chatbot = () => {
         {
           value: "Netted Match",
           label: "Netted Match",
-          trigger: "nettedmatch",
+          trigger: "nettedmatch-after-ref",
         },
       ],
     },
@@ -506,6 +506,114 @@ const Chatbot = () => {
   trigger: "end",
 },
 
+// Selected netted match after reference based match
+{
+  id: "nettedmatch-after-ref",
+  message: "Performing Amount Based Match...",
+  trigger: "processAmountBasedMatch-after-ref",
+},
+{
+  id: "processAmountBasedMatch-after-ref",
+  message: "Performing Amount Based Match...",
+  trigger: () => {
+    handleAmountBasedMatch();
+    return "displayResultsAmountBased-after-ref";
+  },
+},
+{
+  id: "displayResultsAmountBased-after-ref",
+  message: "Matched trades and statements found!",
+  trigger: "show-netted-tolerance-msg-after-ref",
+},
+{
+  id: "show-netted-tolerance-msg-after-ref",
+  message:
+    "You still have more rules to apply based on previous match history: ",
+  trigger: "show-netted-tolerance-options-after-ref",
+},
+{
+  id: "show-netted-tolerance-options-after-ref",
+  options: [
+    {
+      value: "Amount Based Match",
+      label: "Amount Based Match",
+      trigger: "amountBasedMatch-after-ref-netted",
+    },
+    {
+      value: "Match With Tolerance",
+      label: "Match With Tolerance",
+      trigger: "toleranceBasedMatch",
+    },
+  ],
+},
+{
+  id: "amountBasedMatch-after-ref-netted",
+  message: "Performing Amount Based Match...",
+  trigger: "processAmountBasedMatch-after-ref-netted",
+},
+{
+  id: "processAmountBasedMatch-after-ref-netted",
+  message: "Performing Amount Based Match...",
+  trigger: () => {
+    handleAmountBasedMatch();
+    return "displayResultsAmountBased-after-ref-netted";
+  },
+},
+{
+  id: "displayResultsAmountBased-after-ref-netted",
+  message: "Matched trades and statements found!",
+  trigger: "show-netted-msg-after-ref-netted",
+},
+{
+  id: "show-netted-msg-after-ref-netted",
+  message:
+    "You still have more rules to apply based on previous match history: ",
+  trigger: "show-tolerance-option-after-ref-netted-amount",
+},
+{
+  id: "show-tolerance-option-after-ref-netted-amount",
+  options: [
+    {
+      value: "Match With Tolerance",
+      label: "Match With Tolerance",
+      trigger: "toleranceBasedMatch-after-ref-netted-amount",
+    },
+  ],
+},
+
+{
+  id: "toleranceBasedMatch-after-ref-netted-amount",
+  message: "Please enter the amount:",
+  trigger: "amountInput-after-ref-netted-amount",
+},
+{
+  id: "amountInput-after-ref-netted-amount",
+  user: true,
+  validator: (value) => handleAmountInput(value),
+  trigger: "perform-tolerance-after-ref-netted-amount",
+},
+{
+  id: "perform-tolerance-after-ref-netted-amount",
+  message: "Performing Tolerance Based Match...",
+  trigger: "processToleranceBasedMatch-after-ref-netted-amount",
+},
+{
+  id: "processToleranceBasedMatch-after-ref-netted-amount",
+  message: "Performing Tolerance Based Match...",
+  trigger: () => {
+    handleToleranceBasedMatch(amount);
+    return "displayResultsToleranceBased-after-ref-netted-amount";
+  },
+},
+{
+  id: "displayResultsToleranceBased-after-ref-netted-amount",
+  message: "Matched trades and statements found!",
+  trigger: "end",
+},
+
+//
+//
+//
 
     {
       id: "end",
